@@ -1,12 +1,18 @@
 import express from 'express';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
+import { makeExecutableSchema } from 'graphql-tools';
 
-import schema from './schema';
+import typeDefs from './schema';
+import resolvers from './resolvers';
 
 const PORT = 3000;
 const server = express();
 
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
 
 server.use('/graphql', bodyParser.json(), graphqlExpress(() => ({
   schema,

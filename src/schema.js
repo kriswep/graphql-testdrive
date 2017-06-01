@@ -16,6 +16,7 @@ const typeDefs = `
   type Post {
     id: Int!
     title: String
+    text: String
     author: Author
     votes: Int
   }
@@ -23,6 +24,8 @@ const typeDefs = `
   # the schema allows the following query:
   type Query {
     posts: [Post]
+    post(id: Int!): Post
+    authors: [Author]
     author(id: Int!): Author
   }
 

@@ -24,13 +24,23 @@ server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   query: `# Welcome to GraphiQL
 {
-  posts {
-    title
-    votes
-    author {
-      firstName
-    }
+  author(id:1){
+    id
+    firstName
   }
+#  authors{
+#    id
+#    firstName
+#  }
+  post(id:1){
+    title
+    text
+    votes
+  }
+#  posts{
+#    id
+#    title
+#  }
 }`,
 }));
 

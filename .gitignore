@@ -12,4 +12,4 @@ build
 .env
 npm-debug.log
 yarn-error.log
-sample.db
+blog.sqlite

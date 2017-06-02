@@ -52,8 +52,6 @@ server.use(
 );
 
 server.listen(PORT, () => {
-  console.log(
-    `GraphQL Server is now running on http://localhost:${PORT}/graphql`,
-  ); // eslint-disable-line
-  console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`); // eslint-disable-line
+  console.log(`GraphQL Server running on http://localhost:${PORT}/graphql`) // eslint-disable-line
+  console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`) // eslint-disable-line
 });

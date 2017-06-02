@@ -1,4 +1,4 @@
-// import { find, filter } from 'lodash';
+import { omit } from 'lodash';
 
 import { Author, Post } from './connectors';
 // import { authors, posts } from './mock';
@@ -31,14 +31,24 @@ const resolvers = {
     post(_, args) {
       return Post.find({ where: args });
     },
-    posts() {
-      return Post.findAll();
+    posts(_, args) {
+      // return Post.findAll();
+      return Post.findAll({
+        limit: args.limit,
+        offset: args.offset,
+        where: omit(args, ['offset', 'limit']),
+      });
     },
     author(_, args) {
       return Author.find({ where: args });
     },
-    authors() {
-      return Author.findAll();
+    authors(_, args) {
+      return Author.findAll({
+        limit: args.limit,
+        offset: args.offset,
+        where: omit(args, ['offset', 'limit']),
+      });
+      // return Author.findAll({ where: args }).then(res => [res]);
     },
   },
   // TODO

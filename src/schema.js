@@ -23,9 +23,9 @@ const typeDefs = `
 
   # the schema allows the following query:
   type Query {
-    posts: [Post]
+    posts(offset: Int!, limit: Int!, id: Int, title: String, text: String): [Post]
     post(id: Int!): Post
-    authors: [Author]
+    authors(offset: Int!, limit: Int!, id: Int, firstName: String, lastName: String): [Author]
     author(id: Int!): Author
   }
 

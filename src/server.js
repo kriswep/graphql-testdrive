@@ -28,7 +28,7 @@ server.use('/graphiql', graphiqlExpress({
     id
     firstName
   }
-#  authors{
+#  authors(limit:10,offset:5){
 #    id
 #    firstName
 #  }
@@ -37,7 +37,7 @@ server.use('/graphiql', graphiqlExpress({
     text
     votes
   }
-#  posts{
+#  posts(limit:10,offset:5){
 #    id
 #    title
 #  }

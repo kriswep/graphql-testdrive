@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
+    "format": "prettier-eslint \"src/**/*.js\" --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,7 +18,8 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "prettier-eslint-cli": "^4.0.2"
   },
   "eslintConfig": {
     "extends": "airbnb",

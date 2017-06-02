@@ -14,15 +14,21 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-server.use('/graphql', bodyParser.json(), graphqlExpress(() => ({
-  schema,
-  // rootValue,
-  // context: context(request.headers, process.env),
-})));
+server.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress(() => ({
+    schema,
+    // rootValue,
+    // context: context(request.headers, process.env),
+  })),
+);
 
-server.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql',
-  query: `# Welcome to GraphiQL
+server.use(
+  '/graphiql',
+  graphiqlExpress({
+    endpointURL: '/graphql',
+    query: `# Welcome to GraphiQL
 {
   author(id:1){
     id
@@ -42,9 +48,12 @@ server.use('/graphiql', graphiqlExpress({
 #    title
 #  }
 }`,
-}));
+  }),
+);
 
 server.listen(PORT, () => {
-  console.log(`GraphQL Server is now running on http://localhost:${PORT}/graphql`); // eslint-disable-line
+  console.log(
+    `GraphQL Server is now running on http://localhost:${PORT}/graphql`,
+  ); // eslint-disable-line
   console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`); // eslint-disable-line
 });

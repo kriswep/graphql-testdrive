@@ -26,20 +26,16 @@ PostModel.belongsTo(AuthorModel);
 // create mock data with a seed, so we always get the same
 casual.seed(123);
 db.sync({ force: true }).then(() => {
-  _.times(10, () => {
-    return AuthorModel.create({
-      firstName: casual.first_name,
-      lastName: casual.last_name,
-    }).then((author) => {
-      _.times(5, (number) => {
-        return author.createPost({
-          title: `${number + 1}. post by ${author.firstName}`,
-          text: casual.sentences(3),
-          votes: casual.integer(0, 50),
-        });
-      });
-    });
-  });
+  _.times(10, () => AuthorModel.create({
+    firstName: casual.first_name,
+    lastName: casual.last_name,
+  }).then((author) => {
+    _.times(5, number => author.createPost({
+      title: `${number + 1}. post by ${author.firstName}`,
+      text: casual.sentences(3),
+      votes: casual.integer(0, 50),
+    }));
+  }));
 });
 
 const Author = db.models.author;

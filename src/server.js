@@ -6,7 +6,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
-const PORT = 3000;
+const PORT = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
+const IP = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 const server = express();
 
 const schema = makeExecutableSchema({
@@ -51,7 +52,7 @@ server.use(
   }),
 );
 
-server.listen(PORT, () => {
-  console.log(`GraphQL Server running on http://localhost:${PORT}/graphql`) // eslint-disable-line
-  console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`) // eslint-disable-line
+server.listen(PORT, IP, () => {
+  console.log(`GraphQL Server running on http://localhost:${PORT}/graphql`); // eslint-disable-line
+  console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`); // eslint-disable-line
 });

@@ -51,17 +51,16 @@ const resolvers = {
       // return Author.findAll({ where: args }).then(res => [res]);
     },
   },
-  // TODO
-  // Mutation: {
-  //   upvotePost: (_, { postId }) => {
-  //     const post = find(posts, { id: postId });
-  //     if (!post) {
-  //       throw new Error(`Couldn't find post with id ${postId}`);
-  //     }
-  //     post.votes += 1;
-  //     return post;
-  //   },
-  // },
+  Mutation: {
+    upvotePost: (_, { id }) =>
+      Post.find({ where: id }).then(post =>
+        post
+          .update({
+            votes: post.votes + 1,
+          })
+          .then(() => Post.find({ where: id })),
+      ),
+  },
   Author: {
     posts(author) {
       return author.getPosts();

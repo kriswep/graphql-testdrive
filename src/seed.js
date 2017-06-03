@@ -6,7 +6,7 @@ import { times } from 'lodash';
 
 import { db, Author } from './connectors';
 
-(async function seed() {
+(function seed() {
   // create mock data with a seed, so we always get the same
   casual.seed(123);
   db.sync({ force: true }).then(() => {
@@ -25,6 +25,4 @@ import { db, Author } from './connectors';
       }),
     );
   });
-}()).catch((ex) => {
-  console.log(`ERROR: ${ex}`); // eslint-disable-line
-});
+}());

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
     "format": "prettier-eslint \"src/**/*.js\" --write",
+    "seed": "babel-node \"./src/seed.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

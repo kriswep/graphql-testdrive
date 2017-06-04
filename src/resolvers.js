@@ -52,13 +52,13 @@ const resolvers = {
     },
   },
   Mutation: {
-    upvotePost: (_, { id }) =>
-      Post.find({ where: id }).then(post =>
+    upvotePost: (_, { postId }) =>
+      Post.find({ where: { id: postId } }).then(post =>
         post
           .update({
             votes: post.votes + 1,
           })
-          .then(() => Post.find({ where: id })),
+          .then(() => Post.find({ where: { id: postId } })),
       ),
   },
   Author: {

@@ -6,8 +6,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
-const PORT = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
-const IP = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+const PORT = process.env.PORT || 3000;
+const IP = process.env.IP || '0.0.0.0';
 const server = express();
 
 const schema = makeExecutableSchema({

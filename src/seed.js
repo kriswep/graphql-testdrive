@@ -6,7 +6,7 @@ import { times } from 'lodash';
 
 import { db, Author } from './connectors';
 
-(function seed() {
+(async function seed() {
   // create mock data with a seed, so we always get the same
   casual.seed(123);
   db.sync({ force: true }).then(() => {

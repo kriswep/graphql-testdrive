@@ -11,6 +11,7 @@
     "seedBuild": "node \"./lib/seed.js\"",
     "start": "npm run seedBuild & node \"./lib/server.js\"",
     "test": "jest",
+    "test:debug": "node --debug-brk ./node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"
   },
   "author": "",

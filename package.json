@@ -60,7 +60,15 @@
       "lcov",
       "text",
       "text-summary"
-    ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    }
   },
   "dependencies": {
     "body-parser": "^1.17.2",

@@ -10,20 +10,25 @@
     "seed": "babel-node \"./src/seed.js\"",
     "seedBuild": "node \"./lib/seed.js\"",
     "start": "npm run seedBuild & node \"./lib/server.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:debug": "node --debug-brk ./node_modules/.bin/jest --runInBand",
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.5.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
+    "jest": "^20.0.4",
     "nodemon": "^1.11.0",
-    "prettier-eslint-cli": "^4.0.2"
+    "prettier-eslint-cli": "^4.0.2",
+    "regenerator-runtime": "^0.10.5"
   },
   "eslintConfig": {
     "extends": "airbnb",
@@ -41,6 +46,19 @@
           }
         }
       ]
+    ]
+  },
+  "jest": {
+    "rootDir": "./src",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
     ]
   },
   "dependencies": {

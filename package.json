@@ -7,6 +7,7 @@
     "build": "babel src -d lib",
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
     "format": "prettier-eslint \"src/**/*.js\" --write",
+    "lint": "eslint \"./src\"",
     "seed": "babel-node \"./src/seed.js\"",
     "seedBuild": "node \"./lib/seed.js\"",
     "start": "npm run seedBuild & node \"./lib/server.js\"",

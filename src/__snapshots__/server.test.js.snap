@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`server should use graphiql 1`] = `
+Array [
+  "/graphiql",
+  [Function],
+]
+`;
+
+exports[`server should use graphql 1`] = `
+Array [
+  "/graphql",
+  [Function],
+  [Function],
+]
+`;

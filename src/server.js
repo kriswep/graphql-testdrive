@@ -56,3 +56,5 @@ server.listen(PORT, IP, () => {
   console.log(`GraphQL Server running on http://localhost:${PORT}/graphql`); // eslint-disable-line
   console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`); // eslint-disable-line
 });
+
+export default server;

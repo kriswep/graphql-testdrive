@@ -15,15 +15,13 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-server.use(
-  '/graphql',
-  bodyParser.json(),
-  graphqlExpress(() => ({
-    schema,
-    // rootValue,
-    // context: context(request.headers, process.env),
-  })),
-);
+export const graphqlSchemaFac = () => ({
+  schema,
+  // rootValue,
+  // context: context(request.headers, process.env),
+});
+
+server.use('/graphql', bodyParser.json(), graphqlExpress(graphqlSchemaFac));
 
 server.use(
   '/graphiql',
@@ -56,3 +54,5 @@ server.listen(PORT, IP, () => {
   console.log(`GraphQL Server running on http://localhost:${PORT}/graphql`); // eslint-disable-line
   console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`); // eslint-disable-line
 });
+
+export default server;

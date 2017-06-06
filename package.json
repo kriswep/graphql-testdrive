@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
+    "coverage": "jest --coverage",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
     "format": "prettier-eslint \"src/**/*.js\" --write",
+    "lint": "eslint \"./src\"",
     "seed": "babel-node \"./src/seed.js\"",
     "seedBuild": "node \"./lib/seed.js\"",
     "start": "npm run seedBuild & node \"./lib/server.js\"",
@@ -20,6 +23,7 @@
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.5.1",
+    "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
@@ -59,7 +63,15 @@
       "lcov",
       "text",
       "text-summary"
-    ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    }
   },
   "dependencies": {
     "body-parser": "^1.17.2",

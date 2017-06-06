@@ -53,7 +53,6 @@
     "rootDir": "./src",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "src/__mocks__/**/*.{js,jsx}",
       "!**/node_modules/**"
     ],
     "coverageReporters": [

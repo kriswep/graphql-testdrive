@@ -15,15 +15,13 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-server.use(
-  '/graphql',
-  bodyParser.json(),
-  graphqlExpress(() => ({
-    schema,
-    // rootValue,
-    // context: context(request.headers, process.env),
-  })),
-);
+export const graphqlSchemaFac = () => ({
+  schema,
+  // rootValue,
+  // context: context(request.headers, process.env),
+});
+
+server.use('/graphql', bodyParser.json(), graphqlExpress(graphqlSchemaFac));
 
 server.use(
   '/graphiql',

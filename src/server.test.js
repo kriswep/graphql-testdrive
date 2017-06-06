@@ -1,5 +1,9 @@
-/* globals test expect */
-import server from './server';
+/* globals test expect jest */
+import server, { graphqlSchemaFac } from './server';
+
+jest.mock('graphql-tools', () => ({
+  makeExecutableSchema: jest.fn(() => ({ mock: 'schema' })),
+}));
 
 test('server should use graphql', () => {
   expect(server.use).toHaveBeenCalled();
@@ -13,4 +17,13 @@ test('server should use graphiql', () => {
 
 test('server should listen', () => {
   expect(server.listen).toHaveBeenCalled();
+});
+
+test('graphqlSchemaFactory should return GraphQLOptions with schema', () => {
+  const expected = {
+    schema: {
+      mock: 'schema',
+    },
+  };
+  expect(graphqlSchemaFac()).toEqual(expected);
 });

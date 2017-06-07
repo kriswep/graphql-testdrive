@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "coverage": "jest --coverage",
+    "coverage": "npm run seed && jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
+    "dev:debug": "nodemon ./src/server.js --exec babel-node -e js --inspect",
     "format": "prettier-eslint \"src/**/*.js\" --write",
     "lint": "eslint \"./src\"",
     "seed": "babel-node \"./src/seed.js\"",

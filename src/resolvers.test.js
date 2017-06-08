@@ -14,6 +14,7 @@ jest.mock('./connectors', () => ({
   Post: {
     find: jest.fn(() => global.promise),
     findAll: jest.fn(),
+    upvotePost: jest.fn(),
   },
 }));
 
@@ -25,9 +26,9 @@ test('resolvers should have Query, Mutations, Author and Post attributes', () =>
 });
 
 test('author query should find', () => {
-  const expected = { id: 1 };
-  expect(resolvers.Query.author.bind(null, '', expected)).not.toThrow();
-  expect(Author.find).toHaveBeenCalledWith({ where: expected });
+  const expected = 1;
+  expect(resolvers.Query.author.bind(null, '', { id: expected })).not.toThrow();
+  expect(Author.find).toHaveBeenCalledWith(expected);
 
   Author.find.mockClear();
 });
@@ -35,19 +36,17 @@ test('author query should find', () => {
 test('authors query should findAll', () => {
   const expected = { limit: 1, offset: 2, rest: 3 };
   expect(resolvers.Query.authors.bind(null, '', expected)).not.toThrow();
-  expect(Author.findAll).toHaveBeenCalledWith({
-    limit: expected.limit,
-    offset: expected.offset,
-    where: { rest: 3 },
+  expect(Author.findAll).toHaveBeenCalledWith(expected.limit, expected.offset, {
+    rest: 3,
   });
 
   Author.findAll.mockClear();
 });
 
 test('post query should find', () => {
-  const expected = { id: 1 };
-  expect(resolvers.Query.post.bind(null, '', expected)).not.toThrow();
-  expect(Post.find).toHaveBeenCalledWith({ where: expected });
+  const expected = 1;
+  expect(resolvers.Query.post.bind(null, '', { id: expected })).not.toThrow();
+  expect(Post.find).toHaveBeenCalledWith(expected);
 
   Post.find.mockClear();
 });
@@ -55,10 +54,8 @@ test('post query should find', () => {
 test('posts query should findAll', () => {
   const expected = { limit: 1, offset: 2, rest: 3 };
   expect(resolvers.Query.posts.bind(null, '', expected)).not.toThrow();
-  expect(Post.findAll).toHaveBeenCalledWith({
-    limit: expected.limit,
-    offset: expected.offset,
-    where: { rest: 3 },
+  expect(Post.findAll).toHaveBeenCalledWith(expected.limit, expected.offset, {
+    rest: 3,
   });
 
   Post.findAll.mockClear();
@@ -66,21 +63,26 @@ test('posts query should findAll', () => {
 
 test('upvotePost mutation should update vote', () => {
   const expected = { postId: 2 };
-  expect(resolvers.Mutation.upvotePost.bind(null, '', expected)).not.toThrow();
-  expect(Post.find).toHaveBeenCalledWith({ where: { id: 2 } });
+  expect(
+    resolvers.Mutation.upvotePost.bind(null, '', { postId: expected }),
+  ).not.toThrow();
+  expect(Post.upvotePost).toHaveBeenCalledWith(expected);
 
-  Post.find.mockClear();
+  Post.upvotePost.mockClear();
+  // expect(Post.find).toHaveBeenCalledWith({ where: { id: 2 } });
 
-  const postUpdate = jest.fn((args) => {
-    expect(args).toEqual({ votes: 2 });
-    return Promise.resolve();
-  });
-  global.promiseResolver({
-    votes: 1,
-    update: postUpdate,
-  });
+  // Post.find.mockClear();
 
-  Post.find.mockClear();
+  // const postUpdate = jest.fn((args) => {
+  //   expect(args).toEqual({ votes: 2 });
+  //   return Promise.resolve();
+  // });
+  // global.promiseResolver({
+  //   votes: 1,
+  //   update: postUpdate,
+  // });
+
+  // Post.find.mockClear();
 });
 
 test('Author should getPosts', () => {

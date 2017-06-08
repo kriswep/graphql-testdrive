@@ -8,11 +8,12 @@
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "dev": "nodemon ./src/server.js --exec babel-node -e js",
+    "dev:debug": "nodemon ./src/server.js --exec babel-node -e js --inspect",
     "format": "prettier-eslint \"src/**/*.js\" --write",
     "lint": "eslint \"./src\"",
     "seed": "babel-node \"./src/seed.js\"",
     "seedBuild": "node \"./lib/seed.js\"",
-    "start": "npm run seedBuild & node \"./lib/server.js\"",
+    "start": "npm run seedBuild && node \"./lib/server.js\"",
     "test": "jest",
     "test:debug": "node --debug-brk ./node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"

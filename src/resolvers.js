@@ -4,36 +4,29 @@ import { Author, Post } from './connectors';
 
 const resolvers = {
   Query: {
-    post(_, args) {
-      return Post.find({ where: args });
+    post(_, { id }) {
+      return Post.find(id);
     },
     posts(_, args) {
-      return Post.findAll({
-        limit: args.limit,
-        offset: args.offset,
-        where: omit(args, ['offset', 'limit']),
-      });
+      return Post.findAll(
+        args.limit,
+        args.offset,
+        omit(args, ['offset', 'limit']),
+      );
     },
-    author(_, args) {
-      return Author.find({ where: args });
+    author(_, { id }) {
+      return Author.find(id);
     },
     authors(_, args) {
-      return Author.findAll({
-        limit: args.limit,
-        offset: args.offset,
-        where: omit(args, ['offset', 'limit']),
-      });
+      return Author.findAll(
+        args.limit,
+        args.offset,
+        omit(args, ['offset', 'limit']),
+      );
     },
   },
   Mutation: {
-    upvotePost: (_, { postId }) =>
-      Post.find({ where: { id: postId } }).then(post =>
-        post
-          .update({
-            votes: post.votes + 1,
-          })
-          .then(() => Post.find({ where: { id: postId } })),
-      ),
+    upvotePost: (_, { postId }) => Post.upvotePost(postId),
   },
   Author: {
     posts(author) {

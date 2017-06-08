@@ -4,14 +4,14 @@
 import casual from 'casual';
 import { times } from 'lodash';
 
-import { db, Author } from './connectors';
+import { db, AuthorDb } from './db';
 
 (async function seed() {
   // create mock data with a seed, so we always get the same
   casual.seed(123);
   db.sync({ force: true }).then(() => {
     times(10, () =>
-      Author.create({
+      AuthorDb.create({
         firstName: casual.first_name,
         lastName: casual.last_name,
       }).then((author) => {

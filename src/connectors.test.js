@@ -1,41 +1,41 @@
 /* globals test expect jest */
-import { db, Author, Post } from './connectors';
+import { Author, Post } from './connectors';
+import { AuthorDb, PostDb } from './db';
 
-test('connectors should define db, Author and Post', () => {
-  expect(db).toBeDefined();
-  expect(db.models.author).toBeDefined();
-  expect(db.models.author.attributes.firstName.field).toEqual('firstName');
-  expect(db.models.author.attributes.lastName.field).toEqual('lastName');
-  expect(db.models.author.associations.posts.associationAccessor).toEqual(
-    'posts',
-  );
-  expect(db.models.author.associations.posts.associationType).toEqual(
-    'HasMany',
-  );
+global.promiseResolver = () => null;
+global.promise = new Promise((resolve) => {
+  global.promiseResolver = resolve;
+});
+jest.mock('./db', () => ({
+  AuthorDb: {
+    find: jest.fn(),
+    findAll: jest.fn(),
+  },
+  PostDb: {
+    find: jest.fn(() => global.promise),
+    findAll: jest.fn(),
+  },
+}));
 
-  expect(db.models.post).toBeDefined();
-  expect(db.models.post.attributes.title.field).toEqual('title');
-  expect(db.models.post.associations.author.associationAccessor).toEqual(
-    'author',
-  );
-  expect(db.models.post.associations.author.associationType).toEqual(
-    'BelongsTo',
-  );
-
+test('connectors should define Author and Post', () => {
   expect(Author).toBeDefined();
   expect(Post).toBeDefined();
 });
 
-test('author find should not throw', () => {
+test('author find should find from db model', () => {
   const expected = 1;
   expect(Author.find.bind(null, expected)).not.toThrow();
+  expect(AuthorDb.find).toHaveBeenCalledWith({ where: { id: expected } });
+  AuthorDb.find.mockClear();
 });
 
 test('author findAll should not throw', () => {
-  const expected = { limit: 1, offset: 2, rest: { id: 1 } };
+  const expected = { limit: 1, offset: 2, where: { id: 1 } };
   expect(
-    Author.findAll.bind(null, expected.limit, expected.offset, expected.rest),
+    Author.findAll.bind(null, expected.limit, expected.offset, expected.where),
   ).not.toThrow();
+  expect(AuthorDb.findAll).toHaveBeenCalledWith(expected);
+  AuthorDb.findAll.mockClear();
 });
 
 test('author getPosts should get Posts', () => {
@@ -47,13 +47,17 @@ test('author getPosts should get Posts', () => {
 test('post find should not throw', () => {
   const expected = 1;
   expect(Post.find.bind(null, expected)).not.toThrow();
+  expect(PostDb.find).toHaveBeenCalledWith({ where: { id: expected } });
+  PostDb.find.mockClear();
 });
 
 test('post findAll should not throw', () => {
-  const expected = { limit: 1, offset: 2, rest: { id: 1 } };
+  const expected = { limit: 1, offset: 2, where: { id: 1 } };
   expect(
-    Post.findAll.bind(null, expected.limit, expected.offset, expected.rest),
+    Post.findAll.bind(null, expected.limit, expected.offset, expected.where),
   ).not.toThrow();
+  expect(PostDb.findAll).toHaveBeenCalledWith(expected);
+  PostDb.findAll.mockClear();
 });
 
 test('post getAuthor should get Author', () => {
@@ -63,6 +67,20 @@ test('post getAuthor should get Author', () => {
 });
 
 test('post upvotePost should not throw', () => {
-  const expected = 1;
+  const expected = 2;
   expect(Post.upvotePost.bind(null, expected)).not.toThrow();
+  expect(PostDb.find).toHaveBeenCalledWith({ where: { id: expected } });
+
+  PostDb.find.mockClear();
+
+  const postUpdate = jest.fn((args) => {
+    expect(args).toEqual({ votes: 3 });
+    return Promise.resolve();
+  });
+  global.promiseResolver({
+    votes: 2,
+    update: postUpdate,
+  });
+
+  PostDb.find.mockClear();
 });

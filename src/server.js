@@ -15,10 +15,14 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-export const graphqlSchemaFac = () => ({
+export const graphqlSchemaFac = request => ({
   schema,
   // rootValue,
-  // context: context(request.headers, process.env),
+  context: {
+    user: 'Todo',
+    headers: request.headers,
+    // env: process.env,
+  },
 });
 
 server.use('/graphql', bodyParser.json(), graphqlExpress(graphqlSchemaFac));

@@ -39,7 +39,21 @@
     "extends": "airbnb",
     "plugins": [
       "import"
-    ]
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "react/prop-types": [
+        0
+      ]
+    }
   },
   "babel": {
     "presets": [

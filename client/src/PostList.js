@@ -12,7 +12,7 @@ const PostList = ({ data: { loading, error, posts } }) => {
       {posts.map(post =>
         (<article key={post.id}>
           <header>
-            <h1>{post.title}</h1>
+            <h1>{post.title} ({post.votes})</h1>
           </header>
           <section>{post.text}</section>
         </article>),

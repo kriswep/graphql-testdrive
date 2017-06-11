@@ -45,7 +45,7 @@ const postListQuery = gql`
   }
 `;
 
-const PostListWithData = graphql(postListQuery)(PostList);
+export const PostListWithData = graphql(postListQuery)(PostList);
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {

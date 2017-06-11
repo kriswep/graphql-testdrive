@@ -29,10 +29,10 @@ const client = new ApolloClient({
 
 // for live server
 // const networkInterface = createNetworkInterface({
-//  uri: 'http://localhost:3000/graphql',
+//   uri: 'http://localhost:3000/graphql',
 // });
 // const client = new ApolloClient({
-//  networkInterface,
+//   networkInterface,
 // });
 
 const postListQuery = gql`
@@ -41,6 +41,7 @@ const postListQuery = gql`
       id
       title
       text
+      votes
     }
   }
 `;

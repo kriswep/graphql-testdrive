@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "coverage": "concurrently \"jest --coverage && codecov\" \"node ./scripts/test-client.js\"",
+    "coverage": "concurrently \"jest --coverage && codecov\" \"node ./scripts/coverage-client.js\"",
     "coverage:old": "jest --coverage",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:client": "node ./scripts/start-client.js",

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "coverage": "jest --coverage",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "coverage": "concurrently \"jest --coverage\" \"node ./scripts/test-client.js\"",
+    "coverage:old": "jest --coverage",
+    "coveralls": "cat ./coverage/lcov.info | coveralls && cat .client/coverage/lcov.info | coveralls",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:client": "node ./scripts/start-client.js",
     "dev:server": "nodemon ./src/server.js --exec babel-node -e js",

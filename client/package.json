@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "apollo-test-utils": "^0.3.2",
+    "auth0-js": "^8.7.0",
     "graphql": "^0.10.1",
     "graphql-tools": "^1.0.0",
     "react": "^15.5.4",
     "react-apollo": "^1.4.2",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1"
   },
   "devDependencies": {
     "enzyme": "^2.8.2",

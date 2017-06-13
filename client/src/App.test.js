@@ -16,7 +16,8 @@ jest.mock(
 );
 
 test('App renders without crashing', () => {
+  const auth = { isAuthenticated: () => false };
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<App auth={auth} />, div);
   expect(1).toBe(1);
 });

@@ -14,6 +14,7 @@ import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 import typeDefs from './schema';
 
 import PostList from './PostList';
+
 import './App.css';
 
 // Tut from here https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b?_ga=2.249254087.1991559453.1497035474-344072256.1490729773
@@ -50,22 +51,47 @@ export const PostListWithData = graphql(postListQuery)(PostList);
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
+  goTo(route) {
+    this.props.history.replace(`/${route}`);
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+
     return (
       <ApolloProvider client={client}>
         <div className="App">
           <div className="App-header">
             <h2>Welcome to Apollo Blog</h2>
+            <button onClick={this.goTo.bind(this, 'home')}>
+              Home
+            </button>
+            {!isAuthenticated() &&
+              <button onClick={this.login.bind(this)}>
+                Log In
+              </button>}
+            {isAuthenticated() &&
+              <button onClick={this.logout.bind(this)}>
+                Log Out
+              </button>}
           </div>
           {/* <PostList
-            data={{
-              loading: false,
-              posts: [
-                { id: 1, title: 'title1', text: 'Text' },
-                { id: 2, title: 'title2', text: 'Text 2' },
-              ],
-            }}
-          />*/}
+          data={{
+            loading: false,
+            posts: [
+              { id: 1, title: 'title1', text: 'Text' },
+              { id: 2, title: 'title2', text: 'Text 2' },
+            ],
+          }}
+        />*/}
           <PostListWithData />
         </div>
       </ApolloProvider>

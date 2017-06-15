@@ -8,7 +8,7 @@ import history from './history';
 
 const auth = new Auth();
 
-const handleAuthentication = (nextState) => {
+export const handleAuthentication = (nextState) => {
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();
   }

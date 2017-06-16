@@ -4,11 +4,11 @@ import {
   gql,
   graphql,
   ApolloProvider,
-  // createNetworkInterface, // for live server
+  createNetworkInterface, // for live server
 } from 'react-apollo';
 // for mocked server
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
+// import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+// import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 
 // import { typeDefs } from '../../src/schema';
 import typeDefs from './schema';
@@ -20,20 +20,12 @@ import './App.css';
 // Tut from here https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b?_ga=2.249254087.1991559453.1497035474-344072256.1490729773
 
 // for mocked server
-const schema = makeExecutableSchema({ typeDefs });
-addMockFunctionsToSchema({ schema });
-const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
+// const schema = makeExecutableSchema({ typeDefs });
+// addMockFunctionsToSchema({ schema });
+// const mockNetworkInterface = mockNetworkInterfaceWithSchema({ schema });
 
-const client = new ApolloClient({
-  networkInterface: mockNetworkInterface,
-});
-
-// for live server
-// const networkInterface = createNetworkInterface({
-//   uri: 'http://localhost:3000/graphql',
-// });
 // const client = new ApolloClient({
-//   networkInterface,
+//   networkInterface: mockNetworkInterface,
 // });
 
 const postListQuery = gql`
@@ -51,6 +43,36 @@ export const PostListWithData = graphql(postListQuery)(PostList);
 
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    // for live server
+    const networkInterface = createNetworkInterface({
+      uri: 'http://localhost:3000/graphql',
+    });
+
+    networkInterface.use([
+      {
+        applyMiddleware(req, next) {
+          if (props.auth.isAuthenticated()) {
+            if (!req.options.headers) {
+              req.options.headers = {}; // Create the header object if needed.
+            }
+            // get the authentication token from local storage if it exists
+            const token = props.auth.getAccessToken();
+            req.options.headers.authorization = token
+              ? `Bearer ${token}`
+              : null;
+          }
+          next();
+        },
+      },
+    ]);
+
+    this.client = new ApolloClient({
+      networkInterface,
+    });
+  }
   goTo(route) {
     this.props.history.replace(`/${route}`);
   }
@@ -67,7 +89,7 @@ class App extends Component {
     const { isAuthenticated } = this.props.auth;
 
     return (
-      <ApolloProvider client={client}>
+      <ApolloProvider client={this.client}>
         <div className="App">
           <div className="App-header">
             <h2>Welcome to Apollo Blog</h2>
@@ -83,15 +105,6 @@ class App extends Component {
                 Log Out
               </button>}
           </div>
-          {/* <PostList
-          data={{
-            loading: false,
-            posts: [
-              { id: 1, title: 'title1', text: 'Text' },
-              { id: 2, title: 'title2', text: 'Text 2' },
-            ],
-          }}
-        />*/}
           <PostListWithData />
         </div>
       </ApolloProvider>

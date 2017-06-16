@@ -15,7 +15,7 @@ export default class Auth {
       redirectUri: 'http://localhost:3000/callback',
       audience: 'https://kriswep.eu.auth0.com/userinfo',
       responseType: 'token id_token',
-      scope: 'openid',
+      scope: 'openid api:access',
     });
   }
 
@@ -65,5 +65,14 @@ export default class Auth {
     // access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  getAccessToken() {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('No access token found');
+    }
+    return accessToken;
   }
 }

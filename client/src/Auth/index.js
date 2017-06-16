@@ -13,7 +13,8 @@ export default class Auth {
       domain: 'kriswep.eu.auth0.com',
       clientID: 'rfXisuwipfcqlSx0hNMraKj9eIX7oWLV',
       redirectUri: 'http://localhost:3000/callback',
-      audience: 'https://kriswep.eu.auth0.com/userinfo',
+      // audience: 'https://kriswep.eu.auth0.com/userinfo',
+      audience: 'https://graphql.wetainment.com/api',
       responseType: 'token id_token',
       scope: 'openid api:access',
     });

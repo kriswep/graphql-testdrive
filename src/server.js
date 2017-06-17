@@ -51,6 +51,8 @@ export const graphqlSchemaFac = request => ({
   },
 });
 
+server.use('/', express.static('./client/build'));
+
 server.use(
   '/graphql',
   bodyParser.json(),

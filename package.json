@@ -106,6 +106,7 @@
     "jwks-rsa": "^1.1.1",
     "lodash": "^4.17.4",
     "sequelize": "^3.30.4",
+    "serve-static": "^1.12.3",
     "sqlite3": "^3.1.8"
   }
 }

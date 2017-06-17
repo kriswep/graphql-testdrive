@@ -1,4 +1,6 @@
 import express from 'express';
+import serveStatic from 'serve-static';
+import path from 'path';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -51,7 +53,7 @@ export const graphqlSchemaFac = request => ({
   },
 });
 
-server.use('/', express.static('./client/build'));
+server.use('/', serveStatic(path.join(__dirname, '../client/build')));
 
 server.use(
   '/graphql',

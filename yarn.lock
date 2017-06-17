@@ -3950,7 +3950,7 @@ sequelize@^3.30.4:
     validator "^5.2.0"
     wkx "0.2.0"
 
-serve-static@1.12.3:
+serve-static@1.12.3, serve-static@^1.12.3:
   version "1.12.3"
   resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.12.3.tgz#9f4ba19e2f3030c547f8af99107838ec38d5b1e2"
   dependencies:

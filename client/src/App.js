@@ -11,7 +11,7 @@ import {
 // import { mockNetworkInterfaceWithSchema } from 'apollo-test-utils';
 
 // import { typeDefs } from '../../src/schema';
-import typeDefs from './schema';
+// import typeDefs from './schema';
 
 import PostList from './PostList';
 
@@ -41,6 +41,20 @@ const postListQuery = gql`
 
 export const PostListWithData = graphql(postListQuery)(PostList);
 
+export const addAuthHeader = props => ({
+  applyMiddleware(req, next) {
+    if (props.auth.isAuthenticated()) {
+      if (!req.options.headers) {
+        req.options.headers = {}; // Create the header object if needed.
+      }
+      // get the authentication token from local storage if it exists
+      const token = props.auth.getAccessToken();
+      req.options.headers.authorization = token ? `Bearer ${token}` : null;
+    }
+    next();
+  },
+});
+
 // eslint-disable-next-line react/prefer-stateless-function
 class App extends Component {
   constructor(props) {
@@ -51,23 +65,7 @@ class App extends Component {
       uri: 'http://localhost:3000/graphql',
     });
 
-    networkInterface.use([
-      {
-        applyMiddleware(req, next) {
-          if (props.auth.isAuthenticated()) {
-            if (!req.options.headers) {
-              req.options.headers = {}; // Create the header object if needed.
-            }
-            // get the authentication token from local storage if it exists
-            const token = props.auth.getAccessToken();
-            req.options.headers.authorization = token
-              ? `Bearer ${token}`
-              : null;
-          }
-          next();
-        },
-      },
-    ]);
+    networkInterface.use([addAuthHeader(props)]);
 
     this.client = new ApolloClient({
       networkInterface,

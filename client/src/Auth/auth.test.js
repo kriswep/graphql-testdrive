@@ -33,6 +33,7 @@ test('auth should have its expected properties', () => {
   expect(auth.setSession).toBeDefined();
   expect(auth.logout).toBeDefined();
   expect(auth.isAuthenticated).toBeDefined();
+  expect(auth.getAccessToken).toBeDefined();
 });
 
 test('auth login should authorize', () => {
@@ -104,4 +105,17 @@ test('auth should check if its authenticated', () => {
 
   expect(auth.isAuthenticated()).toBeTruthy();
   expect(auth.isAuthenticated()).toBeFalsy();
+});
+
+test('auth should get access token', () => {
+  const auth = new Auth();
+  global.localStorage = {
+    getItem: jest
+      .fn(() => undefined)
+      .mockImplementationOnce(() => 'accessToken'),
+  };
+
+  expect(auth.getAccessToken()).toBe('accessToken');
+  expect(auth.getAccessToken).toThrow('No access token found');
+  // expect(auth.isAuthenticated()).toBeFalsy();
 });

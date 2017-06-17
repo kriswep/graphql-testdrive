@@ -1,8 +1,3 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 // This example demonstrates a simple server with some
 // relational data: Posts and Authors. You can get the
 // posts for a particular author, and vice-versa
@@ -42,4 +37,4 @@ const typeDefs = `
   }
 `;
 
-exports.default = typeDefs;
+export default typeDefs;

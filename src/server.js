@@ -1,4 +1,6 @@
 import express from 'express';
+import serveStatic from 'serve-static';
+import path from 'path';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 import { makeExecutableSchema } from 'graphql-tools';
@@ -6,22 +8,60 @@ import { makeExecutableSchema } from 'graphql-tools';
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
 const IP = process.env.IP || '0.0.0.0';
 const server = express();
+
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+const jwtAuthz = require('express-jwt-authz');
+
+// Authentication middleware. When used, the
+// access token must exist and be verified against
+// the Auth0 JSON Web Key Set
+const checkJwt = jwt({
+  // Dynamically provide a signing key
+  // based on the kid in the header and
+  // the singing keys provided by the JWKS endpoint.
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: 'https://kriswep.eu.auth0.com/.well-known/jwks.json',
+  }),
+
+  // Validate the audience and the issuer.
+  audience: 'https://graphql.wetainment.com/api',
+  issuer: 'https://kriswep.eu.auth0.com/',
+  algorithms: ['RS256'],
+});
+
+const checkScopes = jwtAuthz(['api:access']);
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
-export const graphqlSchemaFac = () => ({
+export const graphqlSchemaFac = request => ({
   schema,
   // rootValue,
-  // context: context(request.headers, process.env),
+  context: {
+    user: 'Todo',
+    headers: request.headers,
+    // env: process.env,
+  },
 });
 
-server.use('/graphql', bodyParser.json(), graphqlExpress(graphqlSchemaFac));
+server.use('/', serveStatic(path.join(__dirname, '../client/build')));
+
+server.use(
+  '/graphql',
+  bodyParser.json(),
+  checkJwt,
+  checkScopes,
+  graphqlExpress(graphqlSchemaFac),
+);
 
 server.use(
   '/graphiql',

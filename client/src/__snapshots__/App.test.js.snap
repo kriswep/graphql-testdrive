@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders without crashing 1`] = `
+<ApolloProvider
+  client={
+    ApolloClient {
+      "addTypename": true,
+      "dataId": [Function],
+      "dataIdFromObject": [Function],
+      "disableNetworkFetches": false,
+      "fieldWithArgs": [Function],
+      "fragmentMatcher": HeuristicFragmentMatcher {},
+      "initialState": Object {},
+      "middleware": [Function],
+      "mutate": [Function],
+      "networkInterface": HTTPFetchNetworkInterface {
+        "_afterwares": Array [],
+        "_middlewares": Array [
+          Object {
+            "applyMiddleware": [Function],
+          },
+        ],
+        "_opts": Object {},
+        "_uri": "http://localhost:3000/graphql",
+      },
+      "query": [Function],
+      "queryDeduplication": true,
+      "reducerConfig": Object {
+        "addTypename": true,
+        "customResolvers": undefined,
+        "dataIdFromObject": [Function],
+        "fragmentMatcher": [Function],
+      },
+      "resetStore": [Function],
+      "setStore": [Function],
+      "ssrMode": false,
+      "version": "local",
+      "watchQuery": [Function],
+    }
+  }
+>
+  <div
+    className="App"
+  >
+    <div
+      className="App-header"
+    >
+      <h2>
+        Welcome to Apollo Blog
+      </h2>
+      <button
+        onClick={[Function]}
+      >
+        Home
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        Log Out
+      </button>
+    </div>
+    <Apollo(Component) />
+  </div>
+</ApolloProvider>
+`;
+
+exports[`App renders without crashing 2`] = `
+<ApolloProvider
+  client={
+    ApolloClient {
+      "addTypename": true,
+      "dataId": [Function],
+      "dataIdFromObject": [Function],
+      "disableNetworkFetches": false,
+      "fieldWithArgs": [Function],
+      "fragmentMatcher": HeuristicFragmentMatcher {},
+      "initialState": Object {},
+      "middleware": [Function],
+      "mutate": [Function],
+      "networkInterface": HTTPFetchNetworkInterface {
+        "_afterwares": Array [],
+        "_middlewares": Array [
+          Object {
+            "applyMiddleware": [Function],
+          },
+        ],
+        "_opts": Object {},
+        "_uri": "http://localhost:3000/graphql",
+      },
+      "query": [Function],
+      "queryDeduplication": true,
+      "reducerConfig": Object {
+        "addTypename": true,
+        "customResolvers": undefined,
+        "dataIdFromObject": [Function],
+        "fragmentMatcher": [Function],
+      },
+      "resetStore": [Function],
+      "setStore": [Function],
+      "ssrMode": false,
+      "version": "local",
+      "watchQuery": [Function],
+    }
+  }
+>
+  <div
+    className="App"
+  >
+    <div
+      className="App-header"
+    >
+      <h2>
+        Welcome to Apollo Blog
+      </h2>
+      <button
+        onClick={[Function]}
+      >
+        Home
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        Log In
+      </button>
+    </div>
+    <Apollo(Component) />
+  </div>
+</ApolloProvider>
+`;

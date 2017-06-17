@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema definition should be the right one 1`] = `
+"
+  type Author {
+    id: Int!
+    firstName: String
+    lastName: String
+    posts: [Post] # the list of Posts by this author
+  }
+
+  type Post {
+    id: Int!
+    title: String
+    text: String
+    author: Author
+    votes: Int
+  }
+
+  # the schema allows the following query:
+  type Query {
+    posts(offset: Int!, limit: Int!, id: Int, title: String, text: String): [Post]
+    post(id: Int!): Post
+    authors(offset: Int!, limit: Int!, id: Int, firstName: String, lastName: String): [Author]
+    author(id: Int!): Author
+  }
+
+  # this schema allows the following mutation:
+  type Mutation {
+    upvotePost (
+      postId: Int!
+    ): Post
+  }
+"
+`;

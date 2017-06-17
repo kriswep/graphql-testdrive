@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes should define mainRoute 1`] = `
+<BrowserRouter
+  component={[Function]}
+  history={
+    Object {
+      "action": "POP",
+      "block": [Function],
+      "createHref": [Function],
+      "go": [Function],
+      "goBack": [Function],
+      "goForward": [Function],
+      "length": 1,
+      "listen": [Function],
+      "location": Object {
+        "hash": "",
+        "key": undefined,
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+      "push": [Function],
+      "replace": [Function],
+    }
+  }
+>
+  <div>
+    <Route
+      path="/"
+      render={[Function]}
+    />
+    <Route
+      path="/home"
+      render={[Function]}
+    />
+    <Route
+      path="/callback"
+      render={[Function]}
+    />
+  </div>
+</BrowserRouter>
+`;

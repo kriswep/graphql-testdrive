@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`server should serve static files 1`] = `
+Array [
+  "/",
+  [Function],
+]
+`;
+
 exports[`server should use graphiql 1`] = `
 Array [
   "/graphiql",
@@ -10,6 +17,8 @@ Array [
 exports[`server should use graphql 1`] = `
 Array [
   "/graphql",
+  [Function],
+  [Function],
   [Function],
   [Function],
 ]

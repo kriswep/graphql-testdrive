@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "npm install",
+    "prebuild": "npm install --only=dev && npm install --only=prod",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage && codecov",

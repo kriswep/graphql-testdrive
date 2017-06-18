@@ -62,7 +62,7 @@ class App extends Component {
 
     // for live server
     const networkInterface = createNetworkInterface({
-      uri: 'http://localhost:3000/graphql',
+      uri: 'graphql',
     });
 
     networkInterface.use([addAuthHeader(props)]);

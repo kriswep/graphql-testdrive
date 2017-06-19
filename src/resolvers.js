@@ -4,11 +4,11 @@ import { Author, Post } from './connectors';
 
 const resolvers = {
   Query: {
-    post(_, { id }, context) {
-      console.log(context);
+    post(_, { id }) {
       return Post.find(id);
     },
-    posts(_, args) {
+    posts(_, args, context) {
+      console.log(context);
       return Post.findAll(
         args.limit,
         args.offset,

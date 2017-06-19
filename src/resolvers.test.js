@@ -8,6 +8,7 @@ global.promise = new Promise((resolve) => {
 });
 jest.mock('./connectors', () => ({
   Author: {
+    findSub: jest.fn(),
     find: jest.fn(),
     findAll: jest.fn(),
   },
@@ -31,6 +32,16 @@ test('author query should find', () => {
   expect(Author.find).toHaveBeenCalledWith(expected);
 
   Author.find.mockClear();
+});
+
+test('user query should find user with sub', () => {
+  const expected = 'demosub';
+  expect(
+    resolvers.Query.user.bind(null, '', '', { sub: expected }),
+  ).not.toThrow();
+  expect(Author.findSub).toHaveBeenCalledWith(expected);
+
+  Author.findSub.mockClear();
 });
 
 test('authors query should findAll', () => {

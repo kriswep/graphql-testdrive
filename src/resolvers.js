@@ -7,13 +7,16 @@ const resolvers = {
     post(_, { id }) {
       return Post.find(id);
     },
-    posts(_, args, context) {
-      console.log(context);
+    posts(_, args) {
       return Post.findAll(
         args.limit,
         args.offset,
         omit(args, ['offset', 'limit']),
       );
+    },
+    user(_, __, context) {
+      console.log(context.user);
+      Author.findSub('demosub');
     },
     author(_, { id }) {
       return Author.find(id);

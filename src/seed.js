@@ -12,6 +12,7 @@ import { db, AuthorDb } from './db';
   db.sync({ force: true }).then(() => {
     times(10, () =>
       AuthorDb.create({
+        sub: 'demosub',
         firstName: casual.first_name,
         lastName: casual.last_name,
       }).then((author) => {

@@ -6,6 +6,7 @@ const db = new Sequelize('blog', null, null, {
 });
 
 const AuthorModel = db.define('author', {
+  sub: { type: Sequelize.STRING },
   firstName: { type: Sequelize.STRING },
   lastName: { type: Sequelize.STRING },
 });

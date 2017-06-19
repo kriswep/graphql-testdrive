@@ -2,6 +2,9 @@
 import { AuthorDb, PostDb } from './db';
 
 const Author = {
+  findSub(sub) {
+    return AuthorDb.find({ where: { sub } });
+  },
   find(id) {
     return AuthorDb.find({ where: { id } });
   },

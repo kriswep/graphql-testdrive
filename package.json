@@ -17,8 +17,8 @@
     "lint": "eslint \"./src\"",
     "seed": "babel-node \"./src/seed.js\"",
     "seedBuild": "node \"./lib/seed.js\"",
-    "prestart": "npm run build && npm run seedBuild",
-    "start": "npm run seedBuild && node \"./lib/server.js\"",
+    "prestart": "npm run seedBuild",
+    "start": "node \"./lib/server.js\"",
     "test": "jest",
     "test:debug": "node --debug-brk ./node_modules/.bin/jest --runInBand",
     "test:watch": "jest --watch"

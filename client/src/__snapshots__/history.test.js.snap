@@ -12,6 +12,7 @@ Object {
   "listen": [Function],
   "location": Object {
     "hash": "",
+    "key": undefined,
     "pathname": "/",
     "search": "",
     "state": undefined,

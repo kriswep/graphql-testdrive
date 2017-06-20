@@ -15,6 +15,7 @@ exports[`routes should define mainRoute 1`] = `
       "listen": [Function],
       "location": Object {
         "hash": "",
+        "key": undefined,
         "pathname": "/",
         "search": "",
         "state": undefined,

@@ -4,8 +4,7 @@ import { Author, Post } from './connectors';
 
 const resolvers = {
   Query: {
-    post(_, { id }, context) {
-      console.log(context);
+    post(_, { id }) {
       return Post.find(id);
     },
     posts(_, args) {
@@ -14,6 +13,10 @@ const resolvers = {
         args.offset,
         omit(args, ['offset', 'limit']),
       );
+    },
+    user(_, __, context) {
+      console.log(context.user);
+      Author.findSub('demosub');
     },
     author(_, { id }) {
       return Author.find(id);

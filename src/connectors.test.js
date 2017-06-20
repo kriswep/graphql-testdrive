@@ -22,6 +22,13 @@ test('connectors should define Author and Post', () => {
   expect(Post).toBeDefined();
 });
 
+test('author findSub should find from db model', () => {
+  const expected = 1;
+  expect(Author.findSub.bind(null, expected)).not.toThrow();
+  expect(AuthorDb.find).toHaveBeenCalledWith({ where: { sub: expected } });
+  AuthorDb.find.mockClear();
+});
+
 test('author find should find from db model', () => {
   const expected = 1;
   expect(Author.find.bind(null, expected)).not.toThrow();

@@ -26,7 +26,7 @@ test('server should listen', () => {
 
 test('graphqlSchemaFactory should return GraphQLOptions with schema', () => {
   const expected = {
-    context: { headers: 'mockHeaders', user: 'Todo' },
+    context: { headers: 'mockHeaders', user: undefined },
     schema: { mock: 'schema' },
   };
   expect(graphqlSchemaFac({ headers: 'mockHeaders' })).toEqual(expected);

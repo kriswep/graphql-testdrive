@@ -4,6 +4,7 @@ import { db, AuthorDb, PostDb } from './db';
 test('connectors should define db, Author and Post', () => {
   expect(db).toBeDefined();
   expect(AuthorDb).toBeDefined();
+  expect(AuthorDb.attributes.sub.field).toEqual('sub');
   expect(AuthorDb.attributes.firstName.field).toEqual('firstName');
   expect(AuthorDb.attributes.lastName.field).toEqual('lastName');
   expect(AuthorDb.associations.posts.associationAccessor).toEqual('posts');

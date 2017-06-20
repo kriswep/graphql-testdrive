@@ -14,7 +14,7 @@ const server = express();
 
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
-const jwtAuthz = require('express-jwt-authz');
+// const jwtAuthz = require('express-jwt-authz');
 
 // Authentication middleware. When used, the
 // access token must exist and be verified against
@@ -34,9 +34,11 @@ const checkJwt = jwt({
   audience: 'https://graphql.wetainment.com/api',
   issuer: 'https://kriswep.eu.auth0.com/',
   algorithms: ['RS256'],
+  credentialsRequired: false,
 });
 
-const checkScopes = jwtAuthz(['api:access']);
+// ignore scopes, we do that ourselves
+// const checkScopes = jwtAuthz(['api:access']);
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -47,7 +49,7 @@ export const graphqlSchemaFac = request => ({
   schema,
   // rootValue,
   context: {
-    user: 'Todo',
+    user: request.user,
     headers: request.headers,
     // env: process.env,
   },
@@ -59,7 +61,7 @@ server.use(
   '/graphql',
   bodyParser.json(),
   checkJwt,
-  checkScopes,
+  // checkScopes,
   graphqlExpress(graphqlSchemaFac),
 );
 

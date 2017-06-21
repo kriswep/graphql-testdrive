@@ -1,4 +1,4 @@
-/* globals localStorage */
+/* globals localStorage location */
 import auth0 from 'auth0-js';
 import history from '../history';
 
@@ -8,16 +8,17 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
-
+    /* eslint-disable */
     this.auth0 = new auth0.WebAuth({
-      domain: 'kriswep.eu.auth0.com',
-      clientID: 'rfXisuwipfcqlSx0hNMraKj9eIX7oWLV',
-      redirectUri: 'http://localhost:3000/callback',
+      domain: "kriswep.eu.auth0.com",
+      clientID: "rfXisuwipfcqlSx0hNMraKj9eIX7oWLV",
+      redirectUri: `${location.origin}/callback`,
       // audience: 'https://kriswep.eu.auth0.com/userinfo',
-      audience: 'https://graphql.wetainment.com/api',
-      responseType: 'token id_token',
-      scope: 'openid api:access',
+      audience: "https://graphql.wetainment.com/api",
+      responseType: "token id_token",
+      scope: "openid api:access"
     });
+    /* eslint-enable */
   }
 
   login() {

@@ -5,3 +5,6 @@
 Just taking graphql with apollos grahpql-tools for a testdrive. Using a sequelize backend for data persisting
 
 Let's see...
+
+### Note
+In order to test the authentication in graphiql, you need a graphiql app which lets you set headers, e.g https://github.com/skevy/graphiql-app

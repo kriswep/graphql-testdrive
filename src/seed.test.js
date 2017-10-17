@@ -11,8 +11,7 @@ jest.mock('./db', () => ({
     create: jest.fn(() =>
       Promise.resolve({
         createPost: global.createPost,
-      }),
-    ),
+      })),
   },
 }));
 

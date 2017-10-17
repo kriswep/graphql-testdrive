@@ -8,25 +8,17 @@ const resolvers = {
       return Post.find(id);
     },
     posts(_, args) {
-      return Post.findAll(
-        args.limit,
-        args.offset,
-        omit(args, ['offset', 'limit']),
-      );
+      return Post.findAll(args.limit, args.offset, omit(args, ['offset', 'limit']));
     },
     user(_, __, context) {
-      console.log(context.user);
+      console.log(context.user); // eslint-disable-line no-console
       Author.findSub('demosub');
     },
     author(_, { id }) {
       return Author.find(id);
     },
     authors(_, args) {
-      return Author.findAll(
-        args.limit,
-        args.offset,
-        omit(args, ['offset', 'limit']),
-      );
+      return Author.findAll(args.limit, args.offset, omit(args, ['offset', 'limit']));
     },
   },
   Mutation: {

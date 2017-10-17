@@ -40,8 +40,7 @@ const Post = {
         .update({
           votes: post.votes + 1,
         })
-        .then(() => PostDb.find({ where: { id } })),
-    );
+        .then(() => PostDb.find({ where: { id } })));
   },
 };
 

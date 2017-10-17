@@ -36,9 +36,7 @@ test('author query should find', () => {
 
 test('user query should find user with sub', () => {
   const expected = 'demosub';
-  expect(
-    resolvers.Query.user.bind(null, '', '', { sub: expected }),
-  ).not.toThrow();
+  expect(resolvers.Query.user.bind(null, '', '', { sub: expected })).not.toThrow();
   expect(Author.findSub).toHaveBeenCalledWith(expected);
 
   Author.findSub.mockClear();
@@ -74,9 +72,7 @@ test('posts query should findAll', () => {
 
 test('upvotePost mutation should update vote', () => {
   const expected = { postId: 2 };
-  expect(
-    resolvers.Mutation.upvotePost.bind(null, '', { postId: expected }),
-  ).not.toThrow();
+  expect(resolvers.Mutation.upvotePost.bind(null, '', { postId: expected })).not.toThrow();
   expect(Post.upvotePost).toHaveBeenCalledWith(expected);
 
   Post.upvotePost.mockClear();

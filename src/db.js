@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 const db = new Sequelize('blog', null, null, {
   dialect: 'sqlite',
   storage: './blog.sqlite',
+  operatorsAliases: false,
 });
 
 const AuthorModel = db.define('author', {

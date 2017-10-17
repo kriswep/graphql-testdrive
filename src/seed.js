@@ -21,9 +21,7 @@ import { db, AuthorDb } from './db';
             title: `${number + 1}. post by ${author.firstName}`,
             text: casual.sentences(3),
             votes: casual.integer(0, 50),
-          }),
-        );
-      }),
-    );
+          }));
+      }));
   });
 }());

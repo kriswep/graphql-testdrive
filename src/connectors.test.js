@@ -38,9 +38,7 @@ test('author find should find from db model', () => {
 
 test('author findAll should not throw', () => {
   const expected = { limit: 1, offset: 2, where: { id: 1 } };
-  expect(
-    Author.findAll.bind(null, expected.limit, expected.offset, expected.where),
-  ).not.toThrow();
+  expect(Author.findAll.bind(null, expected.limit, expected.offset, expected.where)).not.toThrow();
   expect(AuthorDb.findAll).toHaveBeenCalledWith(expected);
   AuthorDb.findAll.mockClear();
 });
@@ -60,9 +58,7 @@ test('post find should not throw', () => {
 
 test('post findAll should not throw', () => {
   const expected = { limit: 1, offset: 2, where: { id: 1 } };
-  expect(
-    Post.findAll.bind(null, expected.limit, expected.offset, expected.where),
-  ).not.toThrow();
+  expect(Post.findAll.bind(null, expected.limit, expected.offset, expected.where)).not.toThrow();
   expect(PostDb.findAll).toHaveBeenCalledWith(expected);
   PostDb.findAll.mockClear();
 });

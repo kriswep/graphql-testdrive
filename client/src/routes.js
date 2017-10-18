@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, Router } from 'react-router-dom';
 import App from './App';
 import Home from './Home';
 import Callback from './Callback';
@@ -16,7 +16,7 @@ export const handleAuthentication = (auth, nextState) => {
 const makeMainRoutes = () => {
   const auth = new Auth();
   return (
-    <BrowserRouter history={history} component={App}>
+    <Router history={history} component={App}>
       <div>
         <Route
           /* exact*/ path="/"
@@ -25,13 +25,13 @@ const makeMainRoutes = () => {
         <Route path="/home" render={props => <Home auth={auth} {...props} />} />
         <Route
           path="/callback"
-          render={(props) => {
+          render={props => {
             handleAuthentication(auth, props);
             return <Callback {...props} />;
           }}
         />
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 

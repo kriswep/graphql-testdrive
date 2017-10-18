@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`routes should define mainRoute 1`] = `
-<BrowserRouter
+<Router
   component={[Function]}
   history={
     Object {
@@ -15,7 +15,6 @@ exports[`routes should define mainRoute 1`] = `
       "listen": [Function],
       "location": Object {
         "hash": "",
-        "key": undefined,
         "pathname": "/",
         "search": "",
         "state": undefined,
@@ -39,5 +38,5 @@ exports[`routes should define mainRoute 1`] = `
       render={[Function]}
     />
   </div>
-</BrowserRouter>
+</Router>
 `;

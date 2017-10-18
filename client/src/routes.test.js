@@ -1,11 +1,16 @@
 /* globals test expect jest */
-import { shallow } from 'enzyme';
+// import { shallow } from 'enzyme';
 import { Route } from 'react-router';
 import makeMainRoutes, { handleAuthentication } from './routes';
 import * as Auth from './Auth';
 import App from './App';
 import Home from './Home';
 import Callback from './Callback';
+
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 test('routes should define mainRoute', () => {
   const routes = makeMainRoutes();

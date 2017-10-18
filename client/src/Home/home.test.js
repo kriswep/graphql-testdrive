@@ -1,8 +1,12 @@
 /* globals test expect jest */
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+// import { shallow, mount } from 'enzyme';
 import Home from './';
-// import toJson from 'enzyme-to-json';
+
+import Enzyme, { shallow, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 test('Home should notify when logged in', () => {
   const wrapper = shallow(<Home auth={{ isAuthenticated: () => true }} />);

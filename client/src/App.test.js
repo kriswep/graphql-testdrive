@@ -1,9 +1,14 @@
 /* globals test expect jest document */
 import React from 'react';
-import { shallow } from 'enzyme';
+// import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
 import App, { addAuthHeader } from './App';
+
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 jest.mock('./PostList', () => () => <div />);
 jest.mock(

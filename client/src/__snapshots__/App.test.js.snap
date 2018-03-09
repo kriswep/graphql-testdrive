@@ -34,7 +34,7 @@ exports[`App renders without crashing 1`] = `
       "resetStore": [Function],
       "setStore": [Function],
       "ssrMode": false,
-      "version": "local",
+      "version": "1.9.3",
       "watchQuery": [Function],
     }
   }
@@ -98,7 +98,7 @@ exports[`App renders without crashing 2`] = `
       "resetStore": [Function],
       "setStore": [Function],
       "ssrMode": false,
-      "version": "local",
+      "version": "1.9.3",
       "watchQuery": [Function],
     }
   }
